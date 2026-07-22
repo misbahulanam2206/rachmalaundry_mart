@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Laundry Satuan | Rachma Laundry Mart</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#fef2f2',
+              100: '#ffe1e1',
+              500: '#ef4444',
+              600: '#dc2626',
+              700: '#b91c1c',
+            },
+            dark: '#0f172a'
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .fade-up {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp .5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    .delay-1 { animation-delay: .05s }
+    .delay-2 { animation-delay: .10s }
+    .delay-3 { animation-delay: .15s }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 max-w-md mx-auto min-h-screen relative pb-28">
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-primary-600 via-primary-700 to-red-900 text-white pt-6 pb-20 px-5 rounded-b-[2.5rem] shadow-lg sticky top-0 z-20">
+    <div class="flex items-center justify-between">
+      <a href="javascript:history.back()" class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20 active:scale-95 transition">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </a>
+      <div class="text-center">
+        <h1 class="text-base font-bold leading-tight">Laundry Satuan</h1>
+        <p class="text-[11px] text-red-100/90 font-medium">Perawatan Spesial Pakaian Favorit Anda</p>
+      </div>
+      <div class="w-10"></div> <!-- Spacer Balance -->
+    </div>
+  </header>
+
+  <!-- HERO BANNER FLOAT -->
+  <section class="-mt-12 px-4 relative z-30 fade-up delay-1">
+    <div class="bg-white rounded-3xl p-5 shadow-lg border border-slate-100 text-center">
+      <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mx-auto mb-2 shadow-inner ring-4 ring-purple-50/50">
+        <i data-lucide="sparkles" class="w-6 h-6"></i>
+      </div>
+
+      <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Perawatan Khusus Per Item</span>
+      <h2 class="text-base font-bold text-slate-800 mt-2">Daftar Layanan Satuan</h2>
+      <p class="text-xs text-slate-500 leading-relaxed mt-1">
+        Proses pencucian terpisah, menggunakan deterjen khusus bahan halus, serta pengeringan aman anti melar/pudar.
+      </p>
+    </div>
+  </section>
+
+  <!-- ITEM CARDS GRID -->
+  <section class="px-4 mt-6 fade-up delay-2">
+    <div class="flex items-center justify-between mb-3.5">
+      <h3 class="font-bold text-slate-800 text-sm">Pilih Kategori Item</h3>
+      <span class="text-[11px] text-slate-400">Siap Antar-Jemput</span>
+    </div>
+
+    <div class="grid grid-cols-1 gap-3">
+
+      <!-- ITEM 1: Kemeja / Kaos -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center justify-between group active:scale-98 transition">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+            <i data-lucide="shirt" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-xs">Kemeja & Kaos</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">Cuci bersih, rapi, & wangi per potong.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/6285712987757?text=Halo%20Rachma%20Laundry,%20saya%20ingin%20laundry%20satuan%20kemeja/kaos" target="_blank" class="bg-primary-600 hover:bg-primary-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm active:scale-95 transition flex items-center gap-1">
+          <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+          <span>Pesan</span>
+        </a>
+      </div>
+
+      <!-- ITEM 2: Celana -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center justify-between group active:scale-98 transition">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+            <i data-lucide="scissors" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-xs">Celana Jeans / Bahan</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">Perawatan tanpa merusak serat & warna.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/6285712987757?text=Halo%20Rachma%20Laundry,%20saya%20ingin%20laundry%20satuan%20celana" target="_blank" class="bg-primary-600 hover:bg-primary-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm active:scale-95 transition flex items-center gap-1">
+          <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+          <span>Pesan</span>
+        </a>
+      </div>
+
+      <!-- ITEM 3: Jaket -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center justify-between group active:scale-98 transition">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0">
+            <i data-lucide="layers" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-xs">Jaket & Sweater</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">Khusus bahan tebal, kulit, & sintetis.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/6285712987757?text=Halo%20Rachma%20Laundry,%20saya%20ingin%20laundry%20satuan%20jaket" target="_blank" class="bg-primary-600 hover:bg-primary-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm active:scale-95 transition flex items-center gap-1">
+          <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+          <span>Pesan</span>
+        </a>
+      </div>
+
+      <!-- ITEM 4: Bed Cover -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center justify-between group active:scale-98 transition">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+            <i data-lucide="bed" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-xs">Bed Cover & Sprei</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">Dicuci bersih, harum & bebas tungau.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/6285712987757?text=Halo%20Rachma%20Laundry,%20saya%20ingin%20laundry%20bed%20cover" target="_blank" class="bg-primary-600 hover:bg-primary-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm active:scale-95 transition flex items-center gap-1">
+          <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+          <span>Pesan</span>
+        </a>
+      </div>
+
+      <!-- ITEM 5: Selimut -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center justify-between group active:scale-98 transition">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center shrink-0">
+            <i data-lucide="sun" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-xs">Selimut Bulu / Harian</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">Pengeringan sempurna agar bulu halus.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/6285712987757?text=Halo%20Rachma%20Laundry,%20saya%20ingin%20laundry%20selimut" target="_blank" class="bg-primary-600 hover:bg-primary-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm active:scale-95 transition flex items-center gap-1">
+          <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+          <span>Pesan</span>
+        </a>
+      </div>
+
+      <!-- ITEM 6: Stroller -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center justify-between group active:scale-98 transition">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+            <i data-lucide="baby" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-xs">Stroller & Carseat Baby</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">Pencucian steril aman bagi bayi.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/6285712987757?text=Halo%20Rachma%20Laundry,%20saya%20ingin%20laundry%20stroller" target="_blank" class="bg-primary-600 hover:bg-primary-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm active:scale-95 transition flex items-center gap-1">
+          <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+          <span>Pesan</span>
+        </a>
+      </div>
+
+      <!-- ITEM 7: Karpet -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center justify-between group active:scale-98 transition">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+            <i data-lucide="grid" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-xs">Karpet Kuno / Masjid / Rumah</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">Pembersihan debu & noda membandel.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/6285712987757?text=Halo%20Rachma%20Laundry,%20saya%20ingin%20laundry%20karpet" target="_blank" class="bg-primary-600 hover:bg-primary-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm active:scale-95 transition flex items-center gap-1">
+          <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+          <span>Pesan</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA BOX FOOTER -->
+  <section class="px-4 mt-6 fade-up delay-3">
+    <div class="bg-slate-900 text-white rounded-2xl p-4 shadow-sm flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+          <i data-lucide="truck" class="w-4 h-4 text-emerald-400"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-xs">Jemput Barang Di Rumah</h4>
+          <p class="text-[10px] text-slate-300">Khusus Pancoran Mas & Depok Sekitarnya</p>
+        </div>
+      </div>
+      <a href="https://wa.me/6285712987757" target="_blank" class="text-emerald-400 font-bold text-xs hover:underline">
+        Pesan
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="mt-8 text-center text-slate-400 text-xs">
+    <p>© 2026 Rachma Laundry Mart • Satuan & Antar Jemput</p>
+  </footer>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-slate-200/80 max-w-md mx-auto px-6 py-2 z-50">
+    <div class="flex justify-between items-center">
+      
+      <a href="home.html" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium mt-1">Home</span>
+      </a>
+
+      <a href="layanan.html" class="flex flex-col items-center text-primary-600">
+        <i data-lucide="washing-machine" class="w-5 h-5"></i>
+        <span class="text-[10px] font-semibold mt-1">Layanan</span>
+      </a>
+
+      <a href="produk.html" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
+        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium mt-1">Produk</span>
+      </a>
+
+      <a href="contact.html" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
+        <i data-lucide="phone" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium mt-1">Kontak</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <!-- Inisialisasi Lucide Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

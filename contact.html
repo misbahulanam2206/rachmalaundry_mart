@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kontak | Rachma Laundry Mart</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#7e22ce',
+            secondary: '#dc2626',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-gradient-to-br from-purple-50 to-red-50 text-gray-800">
+
+<!-- HEADER -->
+<header class="bg-white shadow sticky top-0 z-10">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-primary">Rachma Laundry Mart</h1>
+    <span class="text-sm text-gray-500">Kontak</span>
+  </div>
+</header>
+
+<!-- MAIN -->
+<section class="py-14">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- TITLE -->
+    <div class="text-center mb-14">
+      <h2 class="text-4xl font-bold text-secondary mb-4">
+        Hubungi Kami
+      </h2>
+      <p class="text-gray-600 max-w-xl mx-auto">
+        Kami siap membantu kebutuhan laundry Anda dengan pelayanan cepat,
+        bersih, dan terpercaya.
+      </p>
+    </div>
+
+    <!-- GRID -->
+    <div class="grid md:grid-cols-2 gap-10">
+
+      <!-- LEFT -->
+      <div class="space-y-6">
+
+        <div class="bg-white p-6 rounded-3xl shadow hover:shadow-lg transition">
+          <h3 class="text-lg font-semibold mb-2 flex items-center gap-2">
+            📍 Alamat
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            Kp Lio RT 006 RW 019 No.61 B<br>
+            Pancoran Mas, Kota Depok
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl shadow hover:shadow-lg transition">
+          <h3 class="text-lg font-semibold mb-2 flex items-center gap-2">
+            📞 Telepon & WhatsApp
+          </h3>
+          <p class="text-gray-600 mb-4">0857-1298-7757</p>
+          <button onclick="chatWA()"
+            class="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-secondary transition">
+            💬 Chat via WhatsApp
+          </button>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl shadow hover:shadow-lg transition">
+          <h3 class="text-lg font-semibold mb-2 flex items-center gap-2">
+            ⏰ Jam Operasional
+          </h3>
+          <p class="text-gray-600">
+            Setiap Hari<br>
+            <strong>06.00 – 20.00 WIB</strong>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition text-center">
+        <h3 class="text-xl font-semibold mb-4">📍 Lokasi Kami</h3>
+        <p class="text-gray-600 mb-6">
+          Klik tombol di bawah untuk langsung membuka lokasi kami di Google Maps.
+        </p>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=Rachma+Laundry+Mart"
+           target="_blank"
+           class="inline-block bg-secondary text-white px-10 py-4 rounded-xl font-semibold hover:bg-red-700 transition">
+          🗺️ Buka Google Maps
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-gray-300 text-center py-6 mt-10">
+  © 2026 <span class="text-white font-semibold">Rachma Laundry Mart</span><br>
+  Bersih • Cepat • Terpercaya
+</footer>
+
+<!-- SCRIPT -->
+<script>
+function chatWA() {
+  const phone = "6285712987757";
+  const message = "Halo Rachma Laundry Mart, saya ingin bertanya.";
+  window.open(
+    `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
+}
+</script>
+
+</body>
+</html>

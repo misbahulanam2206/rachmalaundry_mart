@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kasir POS | Rachma Laundry Mart</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#fef2f2',
+              100: '#ffe1e1',
+              500: '#ef4444',
+              600: '#dc2626',
+              700: '#b91c1c',
+            },
+            dark: '#0f172a'
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .fade-up {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp .5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    .delay-1 { animation-delay: .05s }
+    .delay-2 { animation-delay: .10s }
+    .delay-3 { animation-delay: .15s }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 max-w-md mx-auto min-h-screen relative pb-28">
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-primary-600 via-primary-700 to-red-900 text-white pt-6 pb-16 px-5 rounded-b-[2.5rem] shadow-lg sticky top-0 z-20">
+    <div class="flex items-center justify-between">
+      <a href="javascript:history.back()" class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20 active:scale-95 transition">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </a>
+      <div class="text-center">
+        <h1 class="text-base font-bold leading-tight">Kasir POS</h1>
+        <p class="text-[11px] text-red-100/90 font-medium">Sistem Transaksi Struk Digital</p>
+      </div>
+      <div class="w-10"></div> <!-- Spacer Balance -->
+    </div>
+  </header>
+
+  <!-- PROFILE KASIR CARD (FLOAT) -->
+  <section class="-mt-10 px-4 relative z-30 fade-up delay-1">
+    <div class="bg-white rounded-3xl p-4 shadow-lg border border-slate-100 flex items-center gap-3.5">
+      
+      <!-- FOTO PROFIL KASIR -->
+      <label class="relative cursor-pointer shrink-0">
+        <img id="fotoKasir" src="img/laundry.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Kasir+Rachma&background=fee2e2&color=dc2626'" class="w-16 h-16 rounded-2xl object-cover ring-2 ring-primary-100 shadow-sm">
+        <input type="file" accept="image/*" class="hidden" onchange="ubahFoto(event)">
+        <span class="absolute -bottom-1 -right-1 bg-primary-600 text-white text-[9px] p-1 rounded-lg shadow font-semibold flex items-center gap-0.5">
+          <i data-lucide="camera" class="w-3 h-3"></i>
+        </span>
+      </label>
+
+      <!-- INFO KASIR -->
+      <div class="flex-1 min-w-0">
+        <input id="namaKasir" class="font-bold text-sm text-slate-800 w-full outline-none bg-transparent border-b border-dashed border-slate-200 focus:border-primary-600 transition" value="Kasir Rachma Laundry" onchange="simpanNama()" placeholder="Nama Kasir">
+        <div class="flex items-center gap-2 mt-1.5">
+          <span class="inline-flex items-center gap-1 text-[10px] font-bold bg-emerald-50 text-emerald-600 px-2.5 py-0.5 rounded-full border border-emerald-100">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Kasir Aktif
+          </span>
+          <span class="text-[10px] text-slate-400 font-medium">Depok Outlet</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FORM TRANSAKSI -->
+  <section class="px-4 mt-5 fade-up delay-2">
+    <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 space-y-4">
+      
+      <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+        <div class="flex items-center gap-2">
+          <i data-lucide="receipt" class="w-4 h-4 text-primary-600"></i>
+          <h2 class="font-bold text-slate-800 text-sm">Input Transaksi Baru</h2>
+        </div>
+        <span class="text-[10px] font-semibold text-slate-400" id="liveDate">Hari ini</span>
+      </div>
+
+      <div class="space-y-3">
+        <!-- Nama Pelanggan -->
+        <div>
+          <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1 block">Nama Pelanggan</label>
+          <input id="nama" type="text" placeholder="Masukkan nama pelanggan" class="w-full bg-slate-50 border border-slate-200 focus:border-primary-600 focus:bg-white text-xs p-3 rounded-xl outline-none transition">
+        </div>
+
+        <!-- Pilihan Layanan -->
+        <div>
+          <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1 block">Jenis Layanan</label>
+          <select id="layanan" onchange="hitung()" class="w-full bg-slate-50 border border-slate-200 focus:border-primary-600 focus:bg-white text-xs p-3 rounded-xl outline-none transition text-slate-700 font-medium">
+            <option value="6000">Cuci Kering (Rp 6.000 / Kg)</option>
+            <option value="8000" selected>Cuci Setrika (Rp 8.000 / Kg)</option>
+            <option value="12000">Laundry Express (Rp 12.000 / Kg)</option>
+            <option value="15000">Cuci Bedcover (Rp 15.000 / Item)</option>
+          </select>
+        </div>
+
+        <!-- Berat / Jumlah -->
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1 block">Berat (Kg) / Qty</label>
+            <input id="berat" type="number" step="0.1" min="1" value="1" placeholder="Berat Kg" oninput="hitung()" class="w-full bg-slate-50 border border-slate-200 focus:border-primary-600 focus:bg-white text-xs p-3 rounded-xl outline-none transition">
+          </div>
+
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1 block">Status Bayar</label>
+            <select id="statusBayar" class="w-full bg-slate-50 border border-slate-200 focus:border-primary-600 focus:bg-white text-xs p-3 rounded-xl outline-none transition text-slate-700 font-medium">
+              <option value="LUNAS">LUNAS</option>
+              <option value="BELUM LUNAS">BELUM LUNAS</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Uang Bayar -->
+        <div>
+          <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1 block">Uang Tunai Pelanggan (Rp)</label>
+          <input id="uangBayar" type="number" placeholder="Contoh: 50000" oninput="hitungKembalian()" class="w-full bg-slate-50 border border-slate-200 focus:border-primary-600 focus:bg-white text-xs p-3 rounded-xl outline-none transition">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TOTAL & KEMBALIAN -->
+  <section class="px-4 mt-4 fade-up delay-3">
+    <div class="bg-slate-900 text-white rounded-3xl p-5 shadow-lg space-y-3 relative overflow-hidden">
+      
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <span class="text-xs text-slate-400">Total Tagihan</span>
+        <h2 id="total" class="text-xl font-extrabold text-primary-500">Rp 8.000</h2>
+      </div>
+
+      <div class="flex justify-between items-center text-xs">
+        <span class="text-slate-400">Kembalian Tunai:</span>
+        <span id="kembalian" class="font-bold text-emerald-400">Rp 0</span>
+      </div>
+
+      <button onclick="kirimWA()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-3.5 rounded-xl font-bold text-xs shadow-md active:scale-95 transition flex items-center justify-center gap-2">
+        <i data-lucide="message-circle" class="w-4 h-4 fill-white"></i>
+        <span>Kirim Struk Ke WhatsApp</span>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-slate-200/80 max-w-md mx-auto px-6 py-2 z-50">
+    <div class="flex justify-between items-center">
+      
+      <a href="dashboard.html" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
+        <i data-lucide="layout-grid" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium mt-1">Dashboard</span>
+      </a>
+
+      <a href="cashier.html" class="flex flex-col items-center text-primary-600">
+        <i data-lucide="receipt" class="w-5 h-5"></i>
+        <span class="text-[10px] font-semibold mt-1">Kasir</span>
+      </a>
+
+      <a href="karyawan.html" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
+        <i data-lucide="users" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium mt-1">Karyawan</span>
+      </a>
+
+      <a href="setting.html" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
+        <i data-lucide="settings" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium mt-1">Setting</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    let globalTotal = 8000;
+
+    /* HITUNG TOTAL AUTOMATIS */
+    function hitung() {
+      const harga = parseFloat(document.getElementById("layanan").value) || 0;
+      const berat = parseFloat(document.getElementById("berat").value) || 0;
+      
+      globalTotal = harga * berat;
+      document.getElementById("total").innerText = "Rp " + globalTotal.toLocaleString("id-ID");
+      hitungKembalian();
+    }
+
+    /* HITUNG KEMBALIAN */
+    function hitungKembalian() {
+      const uang = parseFloat(document.getElementById("uangBayar").value) || 0;
+      const kembalian = uang - globalTotal;
+      const displayKembalian = document.getElementById("kembalian");
+
+      if (kembalian >= 0) {
+        displayKembalian.innerText = "Rp " + kembalian.toLocaleString("id-ID");
+        displayKembalian.className = "font-bold text-emerald-400";
+      } else {
+        displayKembalian.innerText = "- Rp " + Math.abs(kembalian).toLocaleString("id-ID");
+        displayKembalian.className = "font-bold text-rose-400";
+      }
+    }
+
+    /* UBAH FOTO PROFIL KASIR */
+    function ubahFoto(e) {
+      if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          document.getElementById("fotoKasir").src = reader.result;
+          localStorage.setItem("fotoKasir", reader.result);
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    }
+
+    /* SIMPAN NAMA KASIR LOCALSTORAGE */
+    function simpanNama() {
+      const namaVal = document.getElementById("namaKasir").value;
+      localStorage.setItem("namaKasir", namaVal);
+    }
+
+    /* KIRIM STRUK KE WHATSAPP */
+    function kirimWA() {
+      const namaKasir = document.getElementById("namaKasir").value || "Kasir Rachma";
+      const namaPelanggan = document.getElementById("nama").value.trim();
+      const berat = document.getElementById("berat").value;
+      const layananSelect = document.getElementById("layanan");
+      const namaLayanan = layananSelect.options[layananSelect.selectedIndex].text;
+      const statusBayar = document.getElementById("statusBayar").value;
+      const tgl = new Date().toLocaleDateString("id-ID", { day: 'numeric', month: 'short', year: 'numeric' });
+
+      if (!namaPelanggan) {
+        alert("Nama Pelanggan wajib diisi!");
+        return;
+      }
+
+      if (!berat || berat <= 0) {
+        alert("Masukkan berat/jumlah laundry!");
+        return;
+      }
+
+      const pesan = 
+`🧾 *STRUK TRANSAKSI LAUNDRY*
+*Rachma Laundry Mart*
+---------------------------------------
+📅 *Tanggal:* ${tgl}
+👤 *Kasir:* ${namaKasir}
+---------------------------------------
+👤 *Pelanggan:* ${namaPelanggan}
+🧺 *Layanan:* ${namaLayanan}
+⚖️ *Berat/Qty:* ${berat} Kg/Item
+💵 *Total Tagihan:* Rp ${globalTotal.toLocaleString("id-ID")}
+📌 *Status Bayar:* [ ${statusBayar} ]
+---------------------------------------
+_Terima kasih telah mempercayakan pakaian Anda di Rachma Laundry Mart!_`;
+
+      const noWA = "6285712987757";
+      window.open("https://wa.me/" + noWA + "?text=" + encodeURIComponent(pesan), "_blank");
+    }
+
+    /* LOAD LOCALSTORAGE ON START */
+    window.onload = () => {
+      if (localStorage.getItem("fotoKasir")) {
+        document.getElementById("fotoKasir").src = localStorage.getItem("fotoKasir");
+      }
+      if (localStorage.getItem("namaKasir")) {
+        document.getElementById("namaKasir").value = localStorage.getItem("namaKasir");
+      }
+      document.getElementById("liveDate").innerText = new Date().toLocaleDateString("id-ID", { day: 'numeric', month: 'short' });
+      hitung();
+    };
+
+    // Inisialisasi Lucide Icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>

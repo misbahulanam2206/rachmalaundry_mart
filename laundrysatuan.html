@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Laundry Satuan | Rachma Laundry Mart</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#fef2f2',
+              100: '#ffe1e1',
+              500: '#ef4444',
+              600: '#dc2626',
+              700: '#b91c1c',
+            },
+            dark: '#0f172a'
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .fade-up {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp .5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    .delay-1 { animation-delay: .05s }
+    .delay-2 { animation-delay: .10s }
+    .delay-3 { animation-delay: .15s }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 max-w-md mx-auto min-h-screen relative pb-28">
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-primary-600 via-primary-700 to-red-900 text-white pt-6 pb-20 px-5 rounded-b-[2.5rem] shadow-lg sticky top-0 z-20">
+    <div class="flex items-center justify-between">
+      <a href="javascript:history.back()" class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20 active:scale-95 transition">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </a>
+      <div class="text-center">
+        <h1 class="text-base font-bold leading-tight">Laundry Satuan</h1>
+        <p class="text-[11px] text-red-100/90 font-medium">Perawatan Khusus Per Item</p>
+      </div>
+      <div class="w-10"></div> <!-- Spacer Balance -->
+    </div>
+  </header>
+
+  <!-- MAIN CARD FLOAT -->
+  <section class="-mt-12 px-4 relative z-30 fade-up delay-1">
+    <div class="bg-white rounded-3xl p-5 shadow-lg border border-slate-100 space-y-4">
+      
+      <!-- HEADER ITEM LIST -->
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center">
+            <i data-lucide="shirt" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-slate-800">Daftar Item Satuan</h2>
+            <p class="text-[10px] text-slate-400">Pilih jumlah item yang ingin dicuci</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTAINER LIST ITEM -->
+      <div id="itemList" class="space-y-3">
+        <!-- Rendered by JavaScript -->
+      </div>
+
+      <!-- LIVE TOTAL & BUTTON -->
+      <div class="pt-3 border-t border-slate-100 space-y-3">
+        <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i data-lucide="calculator" class="w-4 h-4 text-slate-400"></i>
+            <span class="text-xs font-medium text-slate-500">Total Biaya:</span>
+          </div>
+          <span id="grandTotal" class="text-base font-extrabold text-primary-600">Rp0</span>
+        </div>
+
+        <button onclick="buatStruk()" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3.5 rounded-xl font-bold text-xs shadow-md active:scale-95 transition flex items-center justify-center gap-2">
+          <i data-lucide="receipt" class="w-4 h-4"></i>
+          <span>Buat Rincian Struk</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STRUK PREVIEW (POPUP / SECTION) -->
+  <section id="strukContainer" class="px-4 mt-6 hidden fade-up">
+    <div class="bg-white rounded-3xl p-5 shadow-lg border border-slate-200 space-y-4 relative overflow-hidden">
+      <!-- Decorative Header Bar -->
+      <div class="bg-slate-900 text-white p-3 -mx-5 -mt-5 mb-3 flex items-center justify-between px-5">
+        <div class="flex items-center gap-2">
+          <i data-lucide="receipt" class="w-4 h-4 text-emerald-400"></i>
+          <span class="text-xs font-bold uppercase tracking-wider">Struk Pemesanan</span>
+        </div>
+        <span class="text-[10px] text-slate-400">Rachma Laundry</span>
+      </div>
+
+      <div id="strukDetail" class="space-y-2 text-xs divide-y divide-slate-100">
+        <!-- Item detail injected by JS -->
+      </div>
+
+      <div class="pt-2 flex justify-between items-center text-sm font-bold text-slate-800 border-t-2 border-dashed border-slate-200">
+        <span>Total Pembayaran</span>
+        <span id="strukTotal" class="text-primary-600">Rp0</span>
+      </div>
+
+      <a id="btnWA" href="#" target="_blank" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-3.5 rounded-xl font-bold text-xs shadow-md active:scale-95 transition flex items-center justify-center gap-2">
+        <i data-lucide="message-circle" class="w-4 h-4 fill-white"></i>
+        <span>Kirim Pesanan Ke WhatsApp</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER SIMPLE -->
+  <footer class="mt-8 text-center text-slate-400 text-xs">
+    <p>© 2026 Rachma Laundry Mart. All rights reserved.</p>
+  </footer>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-slate-200/80 max-w-md mx-auto px-6 py-2 z-50">
+    <div class="flex justify-between items-center">
+      
+      <a href="home.html" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium mt-1">Home</span>
+      </a>
+
+      <a href="layanan.html" class="flex flex-col items-center text-primary-600">
+        <i data-lucide="washing-machine" class="w-5 h-5"></i>
+        <span class="text-[10px] font-semibold mt-1">Layanan</span>
+      </a>
+
+      <a href="produk.html" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
+        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium mt-1">Produk</span>
+      </a>
+
+      <a href="contact.html" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
+        <i data-lucide="phone" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium mt-1">Kontak</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Data Item Satuan Beserta Harga & Ikon
+    const items = [
+      { id: 'kemeja', nama: 'Kemeja', harga: 15000, icon: 'shirt' },
+      { id: 'celana', nama: 'Celana Panjang', harga: 15000, icon: 'scissors' },
+      { id: 'dress', nama: 'Gaun / Dress', harga: 25000, icon: 'sparkles' },
+      { id: 'jaket', nama: 'Jaket / Coat', harga: 20000, icon: 'layers' },
+      { id: 'sepatu', nama: 'Sepatu', harga: 25000, icon: 'footprints' },
+      { id: 'tas', nama: 'Tas', harga: 20000, icon: 'briefcase' },
+      { id: 'selimut', nama: 'Selimut / Bedcover', harga: 30000, icon: 'bed' }
+    ];
+
+    let qtyData = {};
+    items.forEach(item => qtyData[item.id] = 0);
+
+    // Render Item List
+    function renderItemList() {
+      const container = document.getElementById('itemList');
+      container.innerHTML = '';
+
+      items.forEach(item => {
+        container.innerHTML += `
+          <div class="flex items-center justify-between p-3 rounded-2xl border border-slate-100 bg-slate-50/50">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                <i data-lucide="${item.icon}" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-xs text-slate-800">${item.nama}</h4>
+                <p class="text-[10px] text-slate-400 font-semibold">Rp${item.harga.toLocaleString('id-ID')}</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="changeQty('${item.id}', -1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 text-slate-600 font-bold flex items-center justify-center active:scale-90 transition">-</button>
+              <span id="qty-${item.id}" class="w-6 text-center text-xs font-bold text-slate-800">0</span>
+              <button onclick="changeQty('${item.id}', 1)" class="w-7 h-7 rounded-lg bg-primary-600 text-white font-bold flex items-center justify-center active:scale-90 transition">+</button>
+            </div>
+          </div>
+        `;
+      });
+
+      lucide.createIcons();
+    }
+
+    // Ubah Jumlah Item (Stepper)
+    function changeQty(id, delta) {
+      if (qtyData[id] + delta >= 0) {
+        qtyData[id] += delta;
+        document.getElementById(`qty-${id}`).innerText = qtyData[id];
+        updateTotal();
+      }
+    }
+
+    // Hitung Total Realtime
+    function updateTotal() {
+      let total = 0;
+      items.forEach(item => {
+        total += qtyData[item.id] * item.harga;
+      });
+      document.getElementById('grandTotal').innerText = `Rp${total.toLocaleString('id-ID')}`;
+      return total;
+    }
+
+    // Buat Struk Pemesanan
+    function buatStruk() {
+      const total = updateTotal();
+
+      if (total === 0) {
+        alert("Pilih minimal 1 item laundry terlebih dahulu!");
+        return;
+      }
+
+      const strukDetail = document.getElementById('strukDetail');
+      strukDetail.innerHTML = '';
+
+      let textWA = `Halo Rachma Laundry,\nSaya ingin memesan *Laundry Satuan*:\n\n`;
+
+      items.forEach(item => {
+        const qty = qtyData[item.id];
+        if (qty > 0) {
+          const subtotal = qty * item.harga;
+          textWA += `• ${item.nama} x${qty} = Rp${subtotal.toLocaleString('id-ID')}\n`;
+
+          strukDetail.innerHTML += `
+            <div class="flex justify-between items-center pt-2">
+              <span class="text-slate-600 font-medium">${item.nama} <b class="text-slate-800">x${qty}</b></span>
+              <span class="font-bold text-slate-800">Rp${subtotal.toLocaleString('id-ID')}</span>
+            </div>
+          `;
+        }
+      });
+
+      textWA += `\n*Total Pembayaran: Rp${total.toLocaleString('id-ID')}*`;
+
+      document.getElementById('strukTotal').innerText = `Rp${total.toLocaleString('id-ID')}`;
+      document.getElementById('btnWA').href = `https://wa.me/6285712987757?text=${encodeURIComponent(textWA)}`;
+
+      const strukContainer = document.getElementById('strukContainer');
+      strukContainer.classList.remove('hidden');
+      strukContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Initial setup
+    renderItemList();
+  </script>
+</body>
+</html>
